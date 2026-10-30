@@ -1,1 +1,38 @@
-
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3f2e9"><meta name="description" content="Un pequeño espacio para conectar con Jeyker Salinas.">
+<title>Jeyker Salinas — Hola</title>
+<style>
+:root{color-scheme:light;--ink:#293d34;--muted:#78847a;--paper:#f3f2e9;--line:#cbd1c3}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+.page{min-height:100svh;max-width:1160px;margin:auto;padding:32px clamp(24px,7vw,88px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+header,footer{display:flex;justify-content:space-between;align-items:center;font:10px/1.3 Arial,sans-serif;letter-spacing:.19em;text-transform:uppercase}
+header{position:relative;z-index:1}.mark{font:italic 25px Georgia,serif;letter-spacing:-.1em;text-transform:none}
+main{position:relative;z-index:1;width:min(100%,650px);margin:auto 0;padding:100px 0 110px}
+.eyebrow{display:flex;align-items:center;gap:12px;font:10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#718275}
+.eyebrow:before{content:"";width:27px;height:1px;background:#91a28e}
+h1{font-weight:400;font-size:clamp(68px,13vw,145px);line-height:.92;letter-spacing:-.075em;margin:29px 0}h1 em{font-weight:400;color:#869780}
+.intro{max-width:380px;font-size:clamp(19px,2.5vw,23px);line-height:1.55;color:#647568;margin:0 0 48px}
+.links{border-top:1px solid var(--line);max-width:480px}.link{display:flex;align-items:center;gap:18px;padding:21px 0;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;font:14px Arial,sans-serif;transition:padding .2s,color .2s}
+a.link:hover{padding-left:8px;color:#789076}a.link:focus-visible{outline:2px solid #718b72;outline-offset:4px}.number{color:#99a397;font-size:10px;letter-spacing:.08em}.arrow{margin-left:auto;font-size:20px;font-family:Georgia,serif}.disabled{opacity:.48;cursor:not-allowed}
+footer{color:#8b998b;gap:20px}.botanical{position:absolute;width:min(54vw,600px);height:auto;right:-70px;top:12%;opacity:.26;pointer-events:none}
+@media(max-width:600px){.page{padding:25px 24px}main{padding:100px 0 85px}.botanical{width:86vw;right:-35%;top:18%;opacity:.2}.intro{max-width:290px}footer{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div class="page">
+<header><span class="mark" aria-label="Jeyker Salinas">js.</span><span>Un gusto conocerte</span></header>
+<svg class="botanical" viewBox="0 0 500 720" fill="none" aria-hidden="true"><g stroke="#93a68e" stroke-width="1.2">
+<path d="M250 700C243 512 263 268 382 28M252 570C197 497 142 466 72 446M255 493C314 413 367 390 450 370M264 406C215 336 165 303 93 287M282 310C332 249 378 222 455 210M315 216C275 158 241 129 185 101"/>
+<path d="M195 515C133 525 100 501 72 446C132 438 172 455 195 515ZM224 546C166 538 143 508 135 465C186 475 216 499 224 546ZM315 431C326 376 371 351 426 347C410 399 370 425 315 431ZM344 405C361 354 399 337 460 341C439 384 402 405 344 405ZM205 356C149 366 112 337 93 287C151 286 187 306 205 356ZM235 387C183 378 160 346 153 311C198 322 224 347 235 387ZM331 257C342 211 382 184 437 180C422 225 389 250 331 257ZM357 239C381 200 413 190 463 195C439 228 402 241 357 239ZM276 166C229 162 201 139 185 101C233 104 260 124 276 166ZM295 187C254 169 239 142 241 109C278 128 293 154 295 187Z"/>
+</g></svg>
+<main><div class="eyebrow">Un espacio para conectar</div><h1>Hola<span style="color:#869780">.</span><br>Soy <em>Jeyker.</em></h1>
+<p class="intro">Qué bueno encontrarnos por aquí. Si quieres, seguimos la conversación.</p>
+<nav class="links" aria-label="Enlaces de contacto">
+<!-- Añade tus enlaces en data-url. WhatsApp: https://wa.me/34XXXXXXXXX -->
+<a class="link" data-url="" aria-disabled="true"><span class="number">01</span><span>LinkedIn</span><span class="arrow" aria-hidden="true">↗</span></a>
+<a class="link" data-url="" aria-disabled="true"><span class="number">02</span><span>WhatsApp</span><span class="arrow" aria-hidden="true">↗</span></a>
+</nav></main><footer><span>Jeyker Salinas</span><span>Hecho para conectar · 2026</span></footer></div>
+<script>document.querySelectorAll('[data-url]').forEach(link=>{const url=link.dataset.url.trim();if(url){link.href=url;link.removeAttribute('aria-disabled')}else{link.classList.add('disabled')}});</script>
+</body></html>
