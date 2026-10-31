@@ -415,12 +415,9 @@
       }
     
 .story-intro{max-width:720px;font:clamp(17px,2vw,20px)/1.75 var(--sans);color:var(--soft);margin:-15px 0 55px}
-.chat-card{border:1px solid var(--line);background:#faf9f5;max-width:790px;box-shadow:0 18px 65px #283a3109}
-.chat-head{display:flex;gap:14px;align-items:center;padding:22px 26px;border-bottom:1px solid var(--line);font-family:var(--sans)}.chat-head strong{font-size:14px;font-weight:600}.chat-head small{display:block;color:var(--soft);font-size:11px;margin-top:5px}.chat-symbol{display:grid;place-items:center;width:39px;height:39px;background:#b65335;color:#fff;border-radius:11px;font-size:22px}.chat-status{margin-left:auto;font-size:10px;color:var(--soft);white-space:nowrap}
-.chat-log{min-height:180px;max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:13px;padding:28px 26px;font:14px/1.65 var(--sans)}.bubble{max-width:86%;padding:13px 16px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}.bubble.assistant{align-self:flex-start;background:#eceee7}.bubble.user{align-self:flex-end;background:#dbe3d7}.bubble.error{background:#f5e6de;color:#813f2c}
-.chat-suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:0 26px 20px}.chat-suggestions button{background:transparent;border:1px solid var(--line);border-radius:30px;padding:9px 12px;font:11px var(--sans);color:var(--ink);cursor:pointer;transition:background .2s}.chat-suggestions button:hover{background:#eceee7}
-.chat-form{display:flex;align-items:center;gap:12px;margin:0 26px;border-top:1px solid var(--line)}.chat-form input{flex:1;min-width:0;background:transparent;border:0;outline:0;padding:19px 0;font:14px var(--sans);color:var(--ink)}.chat-form input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.chat-form button{border:0;background:var(--ink);color:#fff;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:20px}.chat-form button:disabled{opacity:.5;cursor:wait}.chat-note{padding:0 26px 18px;margin:0;font:10px/1.5 var(--sans);color:var(--soft)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-@media(max-width:700px){.chat-head,.chat-log{padding-left:17px;padding-right:17px}.chat-suggestions{padding-left:17px;padding-right:17px}.chat-form{margin:0 17px}.chat-note{padding-left:17px;padding-right:17px}.chat-status{display:none}.story-intro{margin-top:0}}
+
+.ask-simple{max-width:790px}.ask-form{display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--ink);padding:8px 0 14px}.ask-form input{flex:1;min-width:0;border:0;background:transparent;outline:0;color:var(--ink);font:clamp(20px,3vw,30px) Georgia,serif}.ask-form input::placeholder{color:#879187;opacity:1}.ask-form input:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.ask-form button{border:0;background:transparent;color:var(--ink);font:30px Georgia,serif;cursor:pointer;padding:0 8px}.ask-form button:disabled{opacity:.35;cursor:wait}.ask-answers{display:flex;flex-direction:column;gap:26px;padding-top:25px}.ask-exchange{padding:0 0 23px;border-bottom:1px solid var(--line)}.ask-question{font:12px/1.5 var(--sans);color:var(--soft);margin-bottom:15px}.ask-answer{font:17px/1.8 var(--sans);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}.ask-status{font:11px/1.6 var(--sans);color:var(--soft);margin:14px 0 0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:700px){.story-intro{margin-top:0}}
 </style>
   </head>
   <body>
@@ -525,12 +522,10 @@
 <div class="section-label reveal">03 / Una forma distinta de conocerme</div>
 <h2 class="reveal">La curiosidad empieza<br><em>con una pregunta.</em></h2>
 <p class="story-intro reveal">¿Te interesa mi experiencia, mi formación o cómo abordaría un problema? Puedes preguntarle a este pequeño asistente basado en mis proyectos y trayectoria.</p>
-<div class="chat-card reveal">
-<div class="chat-head"><div class="chat-symbol" aria-hidden="true">✳</div><div><strong>Ask Jeyker AI</strong><small>Un asistente sobre mi trayectoria</small></div><span class="chat-status" id="chat-status">Demo IA</span></div>
-<div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions text"><div class="bubble assistant">¡Hola! Puedo contarte sobre la experiencia, formación y proyectos de Jeyker. ¿Qué te gustaría saber?</div></div>
-<div class="chat-suggestions" id="chat-suggestions"><button type="button" data-question="¿Qué experiencia profesional tiene Jeyker?">Experiencia profesional ↗</button><button type="button" data-question="¿Qué proyectos de inteligencia artificial ha desarrollado?">Proyectos de IA ↗</button><button type="button" data-question="¿Cómo podríamos colaborar con Jeyker?">Colaboración ↗</button></div>
-<form id="chat-form" class="chat-form"><label class="sr-only" for="chat-input">Tu pregunta</label><input id="chat-input" name="message" type="text" maxlength="500" autocomplete="off" placeholder="Escribe una pregunta..." required><button id="chat-send" type="submit" aria-label="Enviar pregunta">↗</button></form>
-<p class="chat-note">Las respuestas son generadas por IA y pueden contener errores. No compartas información sensible.</p>
+<div class="ask-simple reveal">
+<form id="chat-form" class="ask-form"><label class="sr-only" for="chat-input">Pregúntame algo</label><input id="chat-input" name="message" type="text" maxlength="500" autocomplete="off" placeholder="Pregúntame algo..." required><button id="chat-send" type="submit" aria-label="Enviar pregunta">↗</button></form>
+<div id="chat-log" class="ask-answers" role="log" aria-live="polite" aria-relevant="additions text"></div>
+<p id="chat-status" class="ask-status" aria-live="polite">Una pregunta puede iniciar una buena conversación.</p>
 </div></section><section class="contact" id="contacto">
           <div class="section-label reveal">04 / Hablemos</div>
           <h2 class="reveal">¿Hacemos algo<br /><em>interesante?</em></h2>
@@ -577,5 +572,103 @@
         items.forEach((el) => observer.observe(el));
       }
     </script>
+  </body>
+</html><script>
+(() => {
+  const API_URL = 'https://awesome-ai-profile-api.orangepond-66261a43.spaincentral.azurecontainerapps.io';
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const send = document.getElementById('chat-send');
+  const log = document.getElementById('chat-log');
+  const status = document.getElementById('chat-status');
+  const history = [];
+  let busy = false;
+  const MAX_TURNS = 8;
+  function addExchange(question) {
+    const exchange = document.createElement('div');
+    exchange.className = 'ask-exchange';
+    const prompt = document.createElement('div');
+    prompt.className = 'ask-question';
+    prompt.textContent = question;
+    const answer = document.createElement('div');
+    answer.className = 'ask-answer';
+    answer.textContent = '···';
+    exchange.append(prompt, answer);
+    log.appendChild(exchange);
+    return answer;
+  }
+  async function ask(question) {
+    if (busy || !question || history.filter(m => m.role === 'user').length >= MAX_TURNS) return;
+    busy = true;
+    input.value = '';
+    input.disabled = true;
+    send.disabled = true;
+    status.textContent = 'Escribiendo…';
+    const answer = addExchange(question);
+    const messages = [...history, {role:'user',content:question}].map((m,i) => ({
+      id:'msg-'+i, role:m.role, parts:[{type:'text',text:m.content}]
+    }));
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 60000);
+    let received = '';
+    let finished = false;
+    try {
+      const response = await fetch(API_URL + '/chat/stream', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'text/event-stream'},
+        body:JSON.stringify({profile_id:'jeyker',locale:'es',messages}),
+        signal:controller.signal
+      });
+      if (!response.ok || !response.body) throw new Error('Stream unavailable: '+response.status);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      async function processEvent(block) {
+        const payload = block.split('\n').filter(line => line.startsWith('data:')).map(line => line.slice(5).trimStart()).join('\n');
+        if (!payload) return;
+        if (payload === '[DONE]') {finished = true;return;}
+        let event;
+        try {event = JSON.parse(payload)} catch {return}
+        if (event.type === 'text-delta' && typeof event.delta === 'string') {
+          received += event.delta;
+          answer.textContent = received;
+        } else if (event.type === 'error') {
+          throw new Error(event.errorText || 'Stream error');
+        }
+      }
+      while (true) {
+        const {value,done} = await reader.read();
+        buffer += decoder.decode(value || new Uint8Array(),{stream:!done});
+        buffer = buffer.replace(/\r\n/g,'\n');
+        let index;
+        while ((index=buffer.indexOf('\n\n')) !== -1) {
+          const block=buffer.slice(0,index);
+          buffer=buffer.slice(index+2);
+          await processEvent(block);
+        }
+        if (done || finished) break;
+      }
+      if (!received.trim()) throw new Error('Empty streamed response');
+      history.push({role:'user',content:question},{role:'assistant',content:received});
+      status.textContent = 'Puedes hacer otra pregunta.';
+    } catch(error) {
+      answer.textContent = received || 'No he podido responder ahora mismo. Puedes contactarme directamente por LinkedIn o WhatsApp.';
+      status.textContent = 'El asistente no está disponible en este momento.';
+      console.warn('Chat stream failed:',error);
+    } finally {
+      clearTimeout(timeout);
+      busy = false;
+      if (history.filter(m => m.role === 'user').length < MAX_TURNS) {
+        input.disabled = false;
+        send.disabled = false;
+      } else {
+        input.placeholder = 'Fin de esta conversación';
+        status.textContent = 'Gracias por conversar. Puedes contactarme directamente más abajo.';
+      }
+    }
+  }
+  form.addEventListener('submit',event=>{event.preventDefault();ask(input.value.trim())});
+})();
+</script>
   </body>
 </html>
