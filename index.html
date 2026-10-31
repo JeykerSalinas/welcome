@@ -1,52 +1,563 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f3ec">
-<meta name="description" content="Jeyker Salinas — ingeniería de software, inteligencia artificial y soluciones digitales.">
-<title>Jeyker Salinas — Software & AI</title>
-<style>
-:root{--bg:#f5f3ec;--ink:#283a31;--soft:#66766a;--line:#d7dbd0;--accent:#7f927b;--sans:Arial,Helvetica,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif}a{color:inherit}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
-.shell{max-width:1200px;margin:auto;padding:0 clamp(24px,6vw,86px)}
-.top{height:100px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);font:11px var(--sans);letter-spacing:.14em;text-transform:uppercase}.logo{font:italic 29px Georgia,serif;letter-spacing:-.12em;text-transform:none;text-decoration:none}.top nav{display:flex;gap:28px}.top nav a{text-decoration:none}
-.hero{min-height:min(790px,90svh);display:flex;align-items:center;position:relative;isolation:isolate;padding:90px 0 110px}.hero-content{position:relative;z-index:2}.kicker{font:11px var(--sans);text-transform:uppercase;letter-spacing:.21em;color:var(--soft);display:flex;align-items:center;gap:12px}.kicker:before{content:"";width:29px;height:1px;background:var(--accent)}
-h1{font-size:clamp(66px,10vw,142px);line-height:.96;letter-spacing:-.075em;font-weight:400;margin:36px 0}h1 em{font-weight:400;color:var(--accent)}
-.lead{font-size:clamp(20px,2.5vw,27px);line-height:1.5;color:var(--soft);max-width:580px}.cta{display:inline-flex;gap:36px;align-items:center;text-decoration:none;border-bottom:1px solid var(--ink);padding:14px 0;margin-top:30px;font:13px var(--sans);transition:gap .3s}.cta:hover{gap:48px}
-.leaf{position:absolute;right:-5%;top:5%;width:min(51vw,560px);opacity:.22;z-index:1;pointer-events:none;transform:rotate(-7deg)}
-.section{padding:120px 0;border-top:1px solid var(--line)}.section-label{font:11px var(--sans);letter-spacing:.19em;text-transform:uppercase;color:var(--soft);margin-bottom:36px}.section h2{font-size:clamp(42px,6vw,78px);line-height:1.08;letter-spacing:-.055em;font-weight:400;max-width:820px;margin:0 0 55px}.section h2 em{font-weight:400;color:var(--accent)}
-.columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.panel{padding:35px 0 30px;border-top:1px solid var(--ink)}.panel .num{font:11px var(--sans);color:var(--accent)}.panel h3{font-size:31px;font-weight:400;letter-spacing:-.04em;margin:22px 0}.panel p{font:16px/1.7 var(--sans);color:var(--soft);max-width:420px}
-.project{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.project-art{aspect-ratio:1.35;background:#e3e7db;border:1px solid #d5dbce;display:flex;align-items:center;justify-content:center;overflow:hidden}.project-art span{font:italic clamp(70px,12vw,150px) Georgia,serif;color:#879e88;letter-spacing:-.13em;transform:rotate(-9deg)}.project-copy h3{font-size:clamp(36px,4vw,57px);font-weight:400;letter-spacing:-.05em;margin:10px 0 20px}.project-copy p{font:16px/1.75 var(--sans);color:var(--soft)}.project-copy a{font:13px var(--sans);text-underline-offset:7px}
-.contact{padding:130px 0}.contact h2{font-size:clamp(58px,9vw,118px);letter-spacing:-.07em;line-height:1;font-weight:400;margin:25px 0 45px}.contact h2 em{font-weight:400;color:var(--accent)}.contact-links{display:flex;gap:35px;flex-wrap:wrap;font:14px var(--sans)}.contact-links a{text-underline-offset:7px}
-footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:28px 0 40px;font:10px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.visible{opacity:1;transform:none}
-@media(max-width:700px){.top{height:75px}.top nav{gap:16px;font-size:10px}.hero{min-height:690px;padding:90px 0}.leaf{width:85vw;right:-38%;top:15%;opacity:.14}.columns,.project{grid-template-columns:1fr}.section{padding:80px 0}.contact{padding:90px 0}.project{gap:30px}.project-art{aspect-ratio:1.6}footer{font-size:9px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5f3ec" />
+    <meta
+      name="description"
+      content="Jeyker Salinas — ingeniería de software, inteligencia artificial y soluciones digitales."
+    />
+    <title>Jeyker Salinas — Software & AI</title>
+    <style>
+      :root {
+        --bg: #f5f3ec;
+        --ink: #283a31;
+        --soft: #66766a;
+        --line: #d7dbd0;
+        --accent: #7f927b;
+        --sans: Arial, Helvetica, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        position: relative;
+        isolation: isolate;
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+      }
+      a {
+        color: inherit;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 5px;
+      }
+      .shell {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 clamp(24px, 6vw, 86px);
+      }
+      .top {
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        font: 11px var(--sans);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .logo {
+        font: italic 29px Georgia, serif;
+        letter-spacing: -0.12em;
+        text-transform: none;
+        text-decoration: none;
+      }
+      .top nav {
+        display: flex;
+        gap: 28px;
+      }
+      .top nav a {
+        text-decoration: none;
+      }
+      .hero {
+        min-height: min(790px, 90svh);
+        display: flex;
+        align-items: center;
+        position: relative;
+        isolation: isolate;
+        padding: 90px 0 110px;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .kicker {
+        font: 11px var(--sans);
+        text-transform: uppercase;
+        letter-spacing: 0.21em;
+        color: var(--soft);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .kicker:before {
+        content: "";
+        width: 29px;
+        height: 1px;
+        background: var(--accent);
+      }
+      h1 {
+        font-size: clamp(66px, 10vw, 142px);
+        line-height: 0.96;
+        letter-spacing: -0.075em;
+        font-weight: 400;
+        margin: 36px 0;
+      }
+      h1 em {
+        font-weight: 400;
+        color: var(--accent);
+      }
+      .lead {
+        font-size: clamp(20px, 2.5vw, 27px);
+        line-height: 1.5;
+        color: var(--soft);
+        max-width: 580px;
+      }
+      .cta {
+        display: inline-flex;
+        gap: 36px;
+        align-items: center;
+        text-decoration: none;
+        border-bottom: 1px solid var(--ink);
+        padding: 14px 0;
+        margin-top: 30px;
+        font: 13px var(--sans);
+        transition: gap 0.3s;
+      }
+      .cta:hover {
+        gap: 48px;
+      }
+      .leaf {
+        position: absolute;
+        right: -5%;
+        top: 5%;
+        width: min(51vw, 560px);
+        opacity: 0.22;
+        z-index: 1;
+        pointer-events: none;
+        transform: rotate(-7deg);
+      }
+      .section {
+        padding: 120px 0;
+        border-top: 1px solid var(--line);
+      }
+      .section-label {
+        font: 11px var(--sans);
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+        color: var(--soft);
+        margin-bottom: 36px;
+      }
+      .section h2 {
+        font-size: clamp(42px, 6vw, 78px);
+        line-height: 1.08;
+        letter-spacing: -0.055em;
+        font-weight: 400;
+        max-width: 820px;
+        margin: 0 0 55px;
+      }
+      .section h2 em {
+        font-weight: 400;
+        color: var(--accent);
+      }
+      .columns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .panel {
+        padding: 35px 0 30px;
+        border-top: 1px solid var(--ink);
+      }
+      .panel .num {
+        font: 11px var(--sans);
+        color: var(--accent);
+      }
+      .panel h3 {
+        font-size: 31px;
+        font-weight: 400;
+        letter-spacing: -0.04em;
+        margin: 22px 0;
+      }
+      .panel p {
+        font: 16px/1.7 var(--sans);
+        color: var(--soft);
+        max-width: 420px;
+      }
+      .project {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+      .project-art {
+        aspect-ratio: 1.35;
+        background: #e3e7db;
+        border: 1px solid #d5dbce;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .project-art span {
+        font: italic clamp(70px, 12vw, 150px) Georgia, serif;
+        color: #879e88;
+        letter-spacing: -0.13em;
+        transform: rotate(-9deg);
+      }
+      .project-copy h3 {
+        font-size: clamp(36px, 4vw, 57px);
+        font-weight: 400;
+        letter-spacing: -0.05em;
+        margin: 10px 0 20px;
+      }
+      .project-copy p {
+        font: 16px/1.75 var(--sans);
+        color: var(--soft);
+      }
+      .project-copy a {
+        font: 13px var(--sans);
+        text-underline-offset: 7px;
+      }
+      .contact {
+        padding: 130px 0;
+      }
+      .contact h2 {
+        font-size: clamp(58px, 9vw, 118px);
+        letter-spacing: -0.07em;
+        line-height: 1;
+        font-weight: 400;
+        margin: 25px 0 45px;
+      }
+      .contact h2 em {
+        font-weight: 400;
+        color: var(--accent);
+      }
+      .contact-links {
+        display: flex;
+        gap: 35px;
+        flex-wrap: wrap;
+        font: 14px var(--sans);
+      }
+      .contact-links a {
+        text-underline-offset: 7px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        border-top: 1px solid var(--line);
+        padding: 28px 0 40px;
+        font: 10px var(--sans);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--soft);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.8s ease,
+          transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      @media (max-width: 700px) {
+        .top {
+          height: 75px;
+        }
+        .top nav {
+          gap: 16px;
+          font-size: 10px;
+        }
+        .hero {
+          min-height: 690px;
+          padding: 90px 0;
+        }
+        .leaf {
+          width: 85vw;
+          right: -38%;
+          top: 15%;
+          opacity: 0.14;
+        }
+        .columns,
+        .project {
+          grid-template-columns: 1fr;
+        }
+        .section {
+          padding: 80px 0;
+        }
+        .contact {
+          padding: 90px 0;
+        }
+        .project {
+          gap: 30px;
+        }
+        .project-art {
+          aspect-ratio: 1.6;
+        }
+        footer {
+          font-size: 9px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *:before,
+        *:after {
+          transition: none !important;
+          animation: none !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
 
-/* Motivos geométricos inspirados en el isotipo de las tarjetas. */
-.hero{overflow:hidden}.motif-field{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;color:#b65335}.motif{position:absolute;width:clamp(120px,17vw,230px);opacity:.095;animation:motif-float 28s ease-in-out infinite alternate;will-change:transform}.brand-motif{display:block;width:100%;height:auto}.motif-one{right:3%;top:10%;width:clamp(190px,28vw,360px);opacity:.13;animation-duration:36s}.motif-two{right:32%;bottom:3%;width:155px;opacity:.065;animation-delay:-12s;animation-duration:43s}.motif-three{right:-4%;bottom:1%;width:120px;opacity:.075;animation-delay:-19s;animation-duration:33s}.motif-four{left:48%;top:5%;width:90px;opacity:.055;animation-delay:-8s;animation-duration:47s}
-@keyframes motif-float{from{transform:translate3d(-12px,14px,0) rotate(-5deg)}to{transform:translate3d(20px,-22px,0) rotate(6deg)}}
-@media(max-width:700px){.motif-one{right:-27%;top:12%;opacity:.09}.motif-two{right:6%;bottom:5%}.motif-three,.motif-four{display:none}}
-@media(prefers-reduced-motion:reduce){.motif{animation:none!important;will-change:auto}}
-</style>
-</head>
-<body>
-<div class="shell">
-<header class="top"><a class="logo" href="#inicio" aria-label="Inicio">js.</a><nav aria-label="Navegación"><a href="#sobre-mi">Sobre mí</a><a href="#trabajo">Trabajo</a><a href="#contacto">Contacto</a></nav></header>
-<main>
-<section class="hero" id="inicio">
-<div class="motif-field" aria-hidden="true"><div class="motif motif-one"><svg class="brand-motif" viewBox="0 0 200 200" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M100 18 171 59 171 141 100 182 29 141 29 59Z"/><path d="M100 55 139 78 139 122 100 145 61 122 61 78Z"/><path d="M100 18V55M171 59 139 78M171 141 139 122M100 182V145M29 141 61 122M29 59 61 78"/></g><g fill="currentColor"><circle cx="100" cy="18" r="10"/><circle cx="171" cy="59" r="10"/><circle cx="171" cy="141" r="10"/><circle cx="100" cy="182" r="10"/><circle cx="29" cy="141" r="10"/><circle cx="29" cy="59" r="10"/><circle cx="100" cy="55" r="8"/><circle cx="139" cy="78" r="8"/><circle cx="139" cy="122" r="8"/><circle cx="100" cy="145" r="8"/><circle cx="61" cy="122" r="8"/><circle cx="61" cy="78" r="8"/><path d="M100 80 117 90V110L100 120 83 110V90Z"/></g></svg></div><div class="motif motif-two"><svg class="brand-motif" viewBox="0 0 200 200" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M100 18 171 59 171 141 100 182 29 141 29 59Z"/><path d="M100 55 139 78 139 122 100 145 61 122 61 78Z"/><path d="M100 18V55M171 59 139 78M171 141 139 122M100 182V145M29 141 61 122M29 59 61 78"/></g><g fill="currentColor"><circle cx="100" cy="18" r="10"/><circle cx="171" cy="59" r="10"/><circle cx="171" cy="141" r="10"/><circle cx="100" cy="182" r="10"/><circle cx="29" cy="141" r="10"/><circle cx="29" cy="59" r="10"/><circle cx="100" cy="55" r="8"/><circle cx="139" cy="78" r="8"/><circle cx="139" cy="122" r="8"/><circle cx="100" cy="145" r="8"/><circle cx="61" cy="122" r="8"/><circle cx="61" cy="78" r="8"/><path d="M100 80 117 90V110L100 120 83 110V90Z"/></g></svg></div><div class="motif motif-three"><svg class="brand-motif" viewBox="0 0 200 200" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M100 18 171 59 171 141 100 182 29 141 29 59Z"/><path d="M100 55 139 78 139 122 100 145 61 122 61 78Z"/><path d="M100 18V55M171 59 139 78M171 141 139 122M100 182V145M29 141 61 122M29 59 61 78"/></g><g fill="currentColor"><circle cx="100" cy="18" r="10"/><circle cx="171" cy="59" r="10"/><circle cx="171" cy="141" r="10"/><circle cx="100" cy="182" r="10"/><circle cx="29" cy="141" r="10"/><circle cx="29" cy="59" r="10"/><circle cx="100" cy="55" r="8"/><circle cx="139" cy="78" r="8"/><circle cx="139" cy="122" r="8"/><circle cx="100" cy="145" r="8"/><circle cx="61" cy="122" r="8"/><circle cx="61" cy="78" r="8"/><path d="M100 80 117 90V110L100 120 83 110V90Z"/></g></svg></div><div class="motif motif-four"><svg class="brand-motif" viewBox="0 0 200 200" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M100 18 171 59 171 141 100 182 29 141 29 59Z"/><path d="M100 55 139 78 139 122 100 145 61 122 61 78Z"/><path d="M100 18V55M171 59 139 78M171 141 139 122M100 182V145M29 141 61 122M29 59 61 78"/></g><g fill="currentColor"><circle cx="100" cy="18" r="10"/><circle cx="171" cy="59" r="10"/><circle cx="171" cy="141" r="10"/><circle cx="100" cy="182" r="10"/><circle cx="29" cy="141" r="10"/><circle cx="29" cy="59" r="10"/><circle cx="100" cy="55" r="8"/><circle cx="139" cy="78" r="8"/><circle cx="139" cy="122" r="8"/><circle cx="100" cy="145" r="8"/><circle cx="61" cy="122" r="8"/><circle cx="61" cy="78" r="8"/><path d="M100 80 117 90V110L100 120 83 110V90Z"/></g></svg></div></div>
-<div class="hero-content reveal"><div class="kicker">Software engineering · Artificial intelligence</div><h1>Hola.<br>Soy <em>Jeyker.</em></h1><p class="lead">Diseño y construyo experiencias digitales y soluciones inteligentes. Tecnología con intención, claridad y propósito.</p><a class="cta" href="#sobre-mi">Conoce mi trabajo <span aria-hidden="true">↗</span></a></div>
-</section>
-<section class="section" id="sobre-mi"><div class="section-label reveal">01 / Qué hago</div><h2 class="reveal">Buenas ideas.<br><em>Bien construidas.</em></h2><div class="columns"><article class="panel reveal"><span class="num">01</span><h3>Software & interfaces</h3><p>Desarrollo aplicaciones web, interfaces intuitivas y productos digitales con una base técnica sólida.</p></article><article class="panel reveal"><span class="num">02</span><h3>IA aplicada</h3><p>Construyo asistentes inteligentes, sistemas RAG y automatizaciones que resuelven problemas reales.</p></article></div></section>
-<section class="section" id="trabajo"><div class="section-label reveal">02 / Proyecto destacado</div><div class="project"><div class="project-art reveal" aria-hidden="true"><span>ai.</span></div><div class="project-copy reveal"><div class="kicker">Proyecto personal</div><h3>Awesome AI Profile</h3><p>Un asistente conversacional que transforma un perfil profesional en una experiencia interactiva mediante IA y recuperación de conocimiento.</p><p>FastAPI · RAG · Nuxt · Azure</p><a href="https://github.com/JeykerSalinas" target="_blank" rel="noopener noreferrer">Explorar mis proyectos ↗</a></div></div></section>
-<section class="contact" id="contacto"><div class="section-label reveal">03 / Hablemos</div><h2 class="reveal">¿Hacemos algo<br><em>interesante?</em></h2><div class="contact-links reveal"><a href="https://www.linkedin.com/in/jeyker-salinas-608486158/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://wa.me/34624179342" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href="https://github.com/JeykerSalinas" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
-</main>
-<footer><span>Jeyker Salinas © 2026</span><span>Diseñado para conectar</span></footer>
-</div>
-<script>
-const items=document.querySelectorAll('.reveal');
-if(!('IntersectionObserver' in window)){items.forEach(el=>el.classList.add('visible'))}
-else{const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.12});items.forEach(el=>observer.observe(el))}
-</script>
-</body></html>
+      /* Composición fija en los márgenes, con espacio para el contenido. */
+      .motif-field {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+        color: #b65335;
+      }
+      .motif {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        opacity: var(--opacity);
+        transform: translate(-50%, -50%);
+      }
+      .motif:nth-child(1) {
+        --x: 91%;
+        --y: 13%;
+        --size: clamp(620px, 72vw, 1080px);
+        --mobile-size: 520px;
+        --opacity: 0.075;
+        --angle: -12deg;
+        --delay: -40s;
+      }
+      .motif:nth-child(2) {
+        --x: 3%;
+        --y: 34%;
+        --size: clamp(300px, 32vw, 460px);
+        --mobile-size: 280px;
+        --opacity: 0.045;
+        --angle: 18deg;
+        --delay: -95s;
+      }
+      .motif:nth-child(3) {
+        --x: 98%;
+        --y: 54%;
+        --size: clamp(420px, 46vw, 680px);
+        --mobile-size: 390px;
+        --opacity: 0.055;
+        --angle: -22deg;
+        --delay: -70s;
+      }
+      .motif:nth-child(4) {
+        --x: 10%;
+        --y: 73%;
+        --size: clamp(280px, 28vw, 400px);
+        --mobile-size: 250px;
+        --opacity: 0.045;
+        --angle: 10deg;
+        --delay: -120s;
+      }
+      .motif:nth-child(5) {
+        --x: 94%;
+        --y: 94%;
+        --size: clamp(360px, 40vw, 580px);
+        --mobile-size: 340px;
+        --opacity: 0.05;
+        --angle: -16deg;
+        --delay: -35s;
+      }
+      .brand-motif {
+        display: block;
+        width: 100%;
+        height: auto;
+        transform: rotate(var(--angle));
+        transform-box: view-box;
+        transform-origin: center;
+        animation: motif-rotate 120s linear var(--delay) infinite;
+      }
+      @keyframes motif-rotate {
+        from {
+          transform: rotate(var(--angle));
+        }
+        to {
+          transform: rotate(calc(var(--angle) + 360deg));
+        }
+      }
+      @media (max-width: 700px) {
+        .motif {
+          width: var(--mobile-size);
+          opacity: calc(var(--opacity) * 0.75);
+        }
+        .motif:nth-child(odd) {
+          left: 110%;
+        }
+        .motif:nth-child(even) {
+          left: -15%;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .brand-motif {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="motif-field" aria-hidden="true">
+      <div class="motif">
+        <svg class="brand-motif" viewBox="0 0 200 200" focusable="false">
+          <use href="./assets/brand-motif.svg#brand-motif" />
+        </svg>
+      </div>
+      <div class="motif">
+        <svg class="brand-motif" viewBox="0 0 200 200" focusable="false">
+          <use href="./assets/brand-motif.svg#brand-motif" />
+        </svg>
+      </div>
+      <div class="motif">
+        <svg class="brand-motif" viewBox="0 0 200 200" focusable="false">
+          <use href="./assets/brand-motif.svg#brand-motif" />
+        </svg>
+      </div>
+      <div class="motif">
+        <svg class="brand-motif" viewBox="0 0 200 200" focusable="false">
+          <use href="./assets/brand-motif.svg#brand-motif" />
+        </svg>
+      </div>
+      <div class="motif">
+        <svg class="brand-motif" viewBox="0 0 200 200" focusable="false">
+          <use href="./assets/brand-motif.svg#brand-motif" />
+        </svg>
+      </div>
+    </div>
+    <div class="shell">
+      <header class="top">
+        <a class="logo" href="#inicio" aria-label="Inicio">js.</a>
+        <nav aria-label="Navegación">
+          <a href="#sobre-mi">Sobre mí</a><a href="#trabajo">Trabajo</a
+          ><a href="#contacto">Contacto</a>
+        </nav>
+      </header>
+      <main>
+        <section class="hero" id="inicio">
+          <div class="hero-content reveal">
+            <div class="kicker">
+              Software engineering · Artificial intelligence
+            </div>
+            <h1>Hola.<br />Soy <em>Jeyker.</em></h1>
+            <p class="lead">
+              Diseño y construyo experiencias digitales y soluciones
+              inteligentes. Tecnología con intención, claridad y propósito.
+            </p>
+            <a class="cta" href="#sobre-mi"
+              >Conoce mi trabajo <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </section>
+        <section class="section" id="sobre-mi">
+          <div class="section-label reveal">01 / Qué hago</div>
+          <h2 class="reveal">Buenas ideas.<br /><em>Bien construidas.</em></h2>
+          <div class="columns">
+            <article class="panel reveal">
+              <span class="num">01</span>
+              <h3>Software & interfaces</h3>
+              <p>
+                Desarrollo aplicaciones web, interfaces intuitivas y productos
+                digitales con una base técnica sólida.
+              </p>
+            </article>
+            <article class="panel reveal">
+              <span class="num">02</span>
+              <h3>IA aplicada</h3>
+              <p>
+                Construyo asistentes inteligentes, sistemas RAG y
+                automatizaciones que resuelven problemas reales.
+              </p>
+            </article>
+          </div>
+        </section>
+        <section class="section" id="trabajo">
+          <div class="section-label reveal">02 / Proyecto destacado</div>
+          <div class="project">
+            <div class="project-art reveal" aria-hidden="true">
+              <span>ai.</span>
+            </div>
+            <div class="project-copy reveal">
+              <div class="kicker">Proyecto personal</div>
+              <h3>Awesome AI Profile</h3>
+              <p>
+                Un asistente conversacional que transforma un perfil profesional
+                en una experiencia interactiva mediante IA y recuperación de
+                conocimiento.
+              </p>
+              <p>FastAPI · RAG · Nuxt · Azure</p>
+              <a
+                href="https://github.com/JeykerSalinas"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Explorar mis proyectos ↗</a
+              >
+            </div>
+          </div>
+        </section>
+        <section class="contact" id="contacto">
+          <div class="section-label reveal">03 / Hablemos</div>
+          <h2 class="reveal">¿Hacemos algo<br /><em>interesante?</em></h2>
+          <div class="contact-links reveal">
+            <a
+              href="https://www.linkedin.com/in/jeyker-salinas-608486158/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >LinkedIn ↗</a
+            ><a
+              href="https://wa.me/34624179342"
+              target="_blank"
+              rel="noopener noreferrer"
+              >WhatsApp ↗</a
+            ><a
+              href="https://github.com/JeykerSalinas"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            >
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>Jeyker Salinas © 2026</span><span>Diseñado para conectar</span>
+      </footer>
+    </div>
+    <script>
+      const items = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) {
+        items.forEach((el) => el.classList.add("visible"));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        items.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>
