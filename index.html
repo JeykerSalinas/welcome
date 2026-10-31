@@ -575,7 +575,13 @@
   </body>
 </html><script>
 (() => {
-  const API_URL = 'https://awesome-ai-profile-api.orangepond-66261a43.spaincentral.azurecontainerapps.io';
+    const API_URL = ["localhost", "127.0.0.1"].includes(
+  window.location.hostname
+)
+  ? "http://localhost:8000"
+  : "https://awesome-ai-profile-api-v2.orangepond-66261a43.spaincentral.azurecontainerapps.io";
+
+
   const form = document.getElementById('chat-form');
   const input = document.getElementById('chat-input');
   const send = document.getElementById('chat-send');
