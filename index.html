@@ -416,7 +416,17 @@
     
 .story-intro{max-width:720px;font:clamp(17px,2vw,20px)/1.75 var(--sans);color:var(--soft);margin:-15px 0 55px}
 
-.ask-simple{max-width:790px}.ask-form{display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--ink);padding:8px 0 14px}.ask-form input{flex:1;min-width:0;border:0;background:transparent;outline:0;color:var(--ink);font:clamp(20px,3vw,30px) Georgia,serif}.ask-form input::placeholder{color:#879187;opacity:1}.ask-form input:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.ask-form button{border:0;background:transparent;color:var(--ink);font:30px Georgia,serif;cursor:pointer;padding:0 8px}.ask-form button:disabled{opacity:.35;cursor:wait}.ask-answers{display:flex;flex-direction:column;gap:26px;padding-top:25px}.ask-exchange{padding:0 0 23px;border-bottom:1px solid var(--line)}.ask-question{font:12px/1.5 var(--sans);color:var(--soft);margin-bottom:15px}.ask-answer{font:17px/1.8 var(--sans);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}.ask-status{font:11px/1.6 var(--sans);color:var(--soft);margin:14px 0 0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.ask-simple{max-width:790px}.ask-form{display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--ink);padding:8px 0 14px}.ask-form input{flex:1;min-width:0;border:0;background:transparent;outline:0;color:var(--ink);font:clamp(20px,3vw,30px) Georgia,serif}.ask-form input::placeholder{color:#879187;opacity:1}.ask-form input:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.ask-form button{border:0;background:transparent;color:var(--ink);font:30px Georgia,serif;cursor:pointer;padding:0 8px}.ask-form button:disabled{opacity:.35;cursor:wait}.ask-answers{display:flex;flex-direction:column;gap:26px;padding-top:25px}.ask-exchange{padding:0 0 23px;border-bottom:1px solid var(--line)}.ask-question{font:12px/1.5 var(--sans);color:var(--soft);margin-bottom:15px}.ask-answer{font:17px/1.8 var(--sans);color:var(--ink);overflow-wrap:anywhere}
+.ask-answer p{margin:0 0 1em}.ask-answer p:last-child{margin-bottom:0}
+.ask-answer h1,.ask-answer h2,.ask-answer h3{font-family:Georgia,serif;font-weight:400;line-height:1.3;letter-spacing:-.025em;margin:1.2em 0 .45em}
+.ask-answer h1{font-size:1.55em}.ask-answer h2{font-size:1.35em}.ask-answer h3{font-size:1.15em}
+.ask-answer ul,.ask-answer ol{padding-left:1.4em;margin:.45em 0 1em}.ask-answer li{padding-left:.15em;margin:.3em 0}
+.ask-answer strong{font-weight:700}.ask-answer a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:4px}
+.ask-answer blockquote{border-left:2px solid var(--accent);padding-left:1em;margin:1em 0;color:var(--soft)}
+.ask-answer code{font: .88em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:#e8ebe1;padding:.12em .3em;border-radius:3px}
+.ask-answer pre{background:#e8ebe1;padding:15px 18px;overflow-x:auto;border-radius:4px;margin:1em 0}.ask-answer pre code{padding:0;background:none}
+.ask-answer.streaming{animation:answer-breathe 1.8s ease-in-out infinite}
+@keyframes answer-breathe{0%,100%{opacity:1}50%{opacity:.76}}.ask-status{font:11px/1.6 var(--sans);color:var(--soft);margin:14px 0 0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:700px){.story-intro{margin-top:0}}
 </style>
   </head>
@@ -590,6 +600,60 @@
   const history = [];
   let busy = false;
   const MAX_TURNS = 8;
+  // Escape model output before applying a small, dependency-free Markdown renderer.
+  function escapeHtml(value) {
+    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function inlineMarkdown(value) {
+    return value.replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  }
+  function renderMarkdown(value) {
+    const lines = escapeHtml(value).replace(/\r\n/g, '\n').split('\n');
+    const output = [];
+    let paragraph = [], list = null, code = [];
+    let inCode = false;
+    const flushParagraph = () => {
+      if (paragraph.length) output.push('<p>' + inlineMarkdown(paragraph.join('<br>')) + '</p>');
+      paragraph = [];
+    };
+    const closeList = () => { if (list) output.push('</' + list + '>'); list = null; };
+    for (const line of lines) {
+      if (/^\s*```/.test(line)) {
+        flushParagraph(); closeList();
+        if (inCode) { output.push('<pre><code>' + code.join('\n') + '</code></pre>'); code = []; }
+        inCode = !inCode; continue;
+      }
+      if (inCode) { code.push(line); continue; }
+      const heading = line.match(/^(#{1,3})\s+(.+)$/);
+      const bullet = line.match(/^\s*[-*+]\s+(.+)$/);
+      const numbered = line.match(/^\s*\d+\.\s+(.+)$/);
+      const quote = line.match(/^>\s?(.*)$/);
+      if (!line.trim()) { flushParagraph(); closeList(); continue; }
+      if (heading) {
+        flushParagraph(); closeList();
+        const level = heading[1].length;
+        output.push('<h' + level + '>' + inlineMarkdown(heading[2]) + '</h' + level + '>');
+      } else if (bullet || numbered) {
+        flushParagraph();
+        const type = bullet ? 'ul' : 'ol';
+        if (list !== type) { closeList(); output.push('<' + type + '>'); list = type; }
+        output.push('<li>' + inlineMarkdown((bullet || numbered)[1]) + '</li>');
+      } else if (quote) {
+        flushParagraph(); closeList();
+        output.push('<blockquote>' + inlineMarkdown(quote[1]) + '</blockquote>');
+      } else {
+        closeList(); paragraph.push(line);
+      }
+    }
+    flushParagraph(); closeList();
+    if (inCode) output.push('<pre><code>' + code.join('\n') + '</code></pre>');
+    return output.join('');
+  }
   function addExchange(question) {
     const exchange = document.createElement('div');
     exchange.className = 'ask-exchange';
@@ -599,6 +663,7 @@
     const answer = document.createElement('div');
     answer.className = 'ask-answer';
     answer.textContent = '···';
+    answer.classList.add('streaming');
     exchange.append(prompt, answer);
     log.appendChild(exchange);
     return answer;
@@ -637,7 +702,7 @@
         try {event = JSON.parse(payload)} catch {return}
         if (event.type === 'text-delta' && typeof event.delta === 'string') {
           received += event.delta;
-          answer.textContent = received;
+          answer.innerHTML = renderMarkdown(received);
         } else if (event.type === 'error') {
           throw new Error(event.errorText || 'Stream error');
         }
@@ -658,11 +723,13 @@
       history.push({role:'user',content:question},{role:'assistant',content:received});
       status.textContent = 'Puedes hacer otra pregunta.';
     } catch(error) {
-      answer.textContent = received || 'No he podido responder ahora mismo. Puedes contactarme directamente por LinkedIn o WhatsApp.';
+      if (received) answer.innerHTML = renderMarkdown(received);
+      else answer.textContent = 'No he podido responder ahora mismo. Puedes contactarme directamente por LinkedIn o WhatsApp.';
       status.textContent = 'El asistente no está disponible en este momento.';
       console.warn('Chat stream failed:',error);
     } finally {
       clearTimeout(timeout);
+      answer.classList.remove('streaming');
       busy = false;
       if (history.filter(m => m.role === 'user').length < MAX_TURNS) {
         input.disabled = false;
